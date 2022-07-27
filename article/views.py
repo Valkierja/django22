@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 
 # Create your views here.
-from .models import ArirticlePost
+from .models import ArticlePost
 import markdown
 from django.shortcuts import render, redirect
 # 引入HttpResponse
@@ -13,13 +13,13 @@ from django.contrib.auth.models import User
 
 
 def article_list(request):
-    articles = ArirticlePost.objects.all()
+    articles = ArticlePost.objects.all()
     context = {'articles': articles}
     return render(request, 'article/list.html', context)
     #return HttpResponse("Hello World!")
 
 def article_details(request, id):
-    article = ArirticlePost.objects.get(id=id)
+    article = ArticlePost.objects.get(id=id)
     article.body = markdown.markdown(
         article.body,
         extensions=[

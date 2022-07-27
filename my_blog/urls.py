@@ -18,8 +18,12 @@ from xml.etree.ElementInclude import include
 from django.contrib import admin
 
 from django.urls import path, include
+from django.shortcuts import redirect
+from django.urls import path, include
+
 
 urlpatterns = [
+    path('', lambda request: redirect('article/', permanent=True)),
     path('admin/', admin.site.urls),
     path("article/", include("article.urls", namespace="article")),
 
