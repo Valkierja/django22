@@ -10,3 +10,4 @@ class ArticlePostForm(forms.ModelForm):
         #TODO:为什么不用指定author，且author没指定default
         # 定义表单包含的字段
         fields = ('title', 'body')
+
