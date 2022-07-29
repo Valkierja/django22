@@ -35,10 +35,10 @@ if 'SECRET_KEY' in os.environ:
     SECRET_KEY = os.environ["SECRET_KEY"]
 
 # SECURITY WARNING: don't run with debug turned on in production!
-if IS_HEROKU:
-    DEBUG = False
-else:
-    DEBUG = True
+# if IS_HEROKU:
+#     DEBUG = False
+# else:
+DEBUG = True
 
 MAX_CONN_AGE = 600
 
@@ -152,12 +152,12 @@ USE_TZ = True
 # #
 
 
-STATIC_ROOT = os.path.join(BASE_DIR, "static/")
+#STATIC_ROOT = os.path.join(BASE_DIR, "static/")
 
-#
-# STATICFILES_DIRS = (
-#     os.path.join(BASE_DIR, "static/"),
-# )
+
+STATICFILES_DIRS = (
+     os.path.join(BASE_DIR, "static/"),
+)
 
 STATIC_URL = 'static/'
 
