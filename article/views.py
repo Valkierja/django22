@@ -16,19 +16,22 @@ def article_list(request):
     articles = ArticlePost.objects.all()
     context = {'articles': articles}
     return render(request, 'article/list.html', context)
-    #return HttpResponse("Hello World!")
+    # return HttpResponse("Hello World!")
+
 
 def article_details(request, id):
     article = ArticlePost.objects.get(id=id)
     article.body = markdown.markdown(
         article.body,
         extensions=[
-        'markdown.extensions.extra',
-        # 语法高亮扩展
-        'markdown.extensions.codehilite',
+            'markdown.extensions.extra',
+            # 语法高亮扩展
+            'markdown.extensions.codehilite',
         ])
     context = {'article': article}
     return render(request, 'article/detail.html', context)
+
+
 def article_create(request):
     if request.method == "POST":
         article_post_form = ArticlePostForm(data=request.POST)
@@ -41,5 +44,5 @@ def article_create(request):
             return HttpResponse("error:form content")
     else:
         article_post_form = ArticlePostForm()
-        context ={'article_post_form': article_post_form}
+        context = {'article_post_form': article_post_form}
         return render(request, 'article/create.html', context)
