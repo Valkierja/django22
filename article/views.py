@@ -14,6 +14,8 @@ from django.contrib.auth.models import User
 
 def article_list(request):
     articles = ArticlePost.objects.all()
+    if len(articles) >= 100:
+        articles = articles[:99] + "..."
     context = {'articles': articles}
     return render(request, 'article/list.html', context)
     # return HttpResponse("Hello World!")
