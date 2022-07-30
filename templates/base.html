@@ -19,18 +19,17 @@
     {% block content %}{% endblock content %}
     <!-- 引入注脚 -->
     {% include 'footer.html' %}
-    <script src="{% static 'jquery/jquery-3.6.0.js' %}"></script>
+    <!-- <script src="{% static 'jquery/jquery-3.6.0.js' %}"></script> -->
 
+    <!-- <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script> -->
     <script src="http://unpkg.com/@popperjs/core@2"></script>
-    <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
-
     <script>
     $('div#article_body table').addClass('table table-bordered');
     $('div#article_body thead').addClass('thead-light');
     </script>
-    {#    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>#}
-    {#    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" crossorigin="anonymous"></script>#}
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js"></script>
 
-{##}
+
 </body>
 </html>
