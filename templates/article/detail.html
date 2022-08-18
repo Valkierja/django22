@@ -17,14 +17,43 @@
         <!-- 标题及作者 -->
         <h1 class="col-12 mt-4 mb-4">{{ article.title }}</h1>
         <div class="col-12 alert alert-success">作者：{{ article.author }}
-          <a href="{% url "article:article_delete" article.id %}">删除文章</a>
+          <a href="javascript:void(0)" onclick="confirm_safe_delete()">删除文章</a>
         </div>
 
-        <!-- 文章正文 -->
         <div class="col-12">
             <p>{{ article.body|safe }}</p>
         </div>
     </div>
 </div>
+<form
+  style="display:none;"
+  id="safe_delete"
+  action="{% url 'article:article_safe_delete' article.id %}"
+  method="POST"
+  >
+{% csrf_token %}
+<button type="submit">s</button>
+</form>
+<script>
+    function confirm_delete(){
+        layer.open({
+            title: "确认删除",
+            content: "确认删除本文吗",
+            yes: function (index, layero){
+                location.href='{% url "article:article_delete" article.id  %}'
+            }
+        })
+    }
+    function confirm_safe_delete() {
+    layer.open({
+        title: "确认删除",
+        content: "确认删除这篇文章吗？",
+        yes: function(index, layero) {
+            $('form#safe_delete button').click();
+            layer.close(index);
+        }
+    })
+}
+</script>
 
 {% endblock content %}

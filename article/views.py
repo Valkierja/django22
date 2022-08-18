@@ -53,7 +53,12 @@ def article_create(request):
 def article_delete(request, id):
     ArticlePost.objects.get(id=id).delete()
     return redirect("article:article_list")
-
+def article_safe_delete(request, id):
+    if request.method == 'POST':
+        ArticlePost.objects.get(id=id).delete()
+        return redirect("article:article_list")
+    else:
+        return HttpResponse("error: POST only.")
 
 
 
