@@ -40,7 +40,7 @@ if 'SECRET_KEY' in os.environ:
 # if IS_HEROKU:
 #     DEBUG = False
 # else:
-DEBUG = True
+DEBUG = False
 
 MAX_CONN_AGE = 600
 
