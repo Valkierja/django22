@@ -11,6 +11,9 @@
           <a class="nav-link" href="{% url 'article:article_list' %}">article</a>
             {% comment %}#article是定义在urls.py中的app_name{% endcomment %}
         </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'article:article_create' %}">post</a>
+        </li>
       </ul>
     </div>
 

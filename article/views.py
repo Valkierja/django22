@@ -43,8 +43,18 @@ def article_create(request):
             new.save()
             return redirect("article:article_list")
         else:
-            return HttpResponse("error:form content")
-    else:
+            return HttpResponse("error: form content format")
+    elif request.method == "GET":
         article_post_form = ArticlePostForm()
         context = {'article_post_form': article_post_form}
         return render(request, 'article/create.html', context)
+
+
+def article_delete(request, id):
+    ArticlePost.objects.get(id=id).delete()
+    return redirect("article:article_list")
+
+
+
+
+
