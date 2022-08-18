@@ -163,7 +163,7 @@ if IS_HEROKU:
     STATIC_ROOT = BASE_DIR / "staticfiles"
 
 STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, "static"),
+    os.path.join(BASE_DIR, "static", "layui"),
 )
 
 # 由于不同情况下和版本下的表现形式的不一致
