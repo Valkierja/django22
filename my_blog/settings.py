@@ -159,7 +159,7 @@ USE_TZ = True
 
 
 STATIC_ROOT = BASE_DIR / "static"
-STATIC_URL = "static/"
+STATIC_URL = "/static/"
 
 # 由于不同情况下和版本下的表现形式的不一致
 # STATIC_URL， STATIC_ROOT， STATICFILES_DIRS这三个变量的左边和邮编是否加斜杠是非常有讲究的，注意查看流量抓包，尝试所有反斜杠存在组合
