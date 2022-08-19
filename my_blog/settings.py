@@ -162,6 +162,7 @@ STATIC_URL = "/static/"
 if IS_HEROKU:
     STATIC_ROOT = BASE_DIR / "staticfiles"
 
+
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "static"),
 )
