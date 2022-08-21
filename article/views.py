@@ -53,6 +53,8 @@ def article_create(request):
 def article_delete(request, id):
     ArticlePost.objects.get(id=id).delete()
     return redirect("article:article_list")
+
+
 def article_safe_delete(request, id):
     if request.method == 'POST':
         ArticlePost.objects.get(id=id).delete()
@@ -60,8 +62,8 @@ def article_safe_delete(request, id):
     else:
         return HttpResponse("error: POST only.")
 
-def article_update(request, id):
 
+def article_update(request, id):
     article = ArticlePost.objects.get(id=id)
     if request.method == "POST":
         article_post_form = ArticlePostForm(data=request.POST)
@@ -74,7 +76,5 @@ def article_update(request, id):
             return HttpResponse("error: form content format")
     else:
         article_post_form = ArticlePostForm()
-        context = { 'article': article, 'article_post_form': article_post_form }
+        context = {'article': article, 'article_post_form': article_post_form}
         return render(request, 'article/update.html', context)
-
-
