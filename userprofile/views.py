@@ -45,7 +45,6 @@ def user_logout(request):
     logout(request)
     return redirect("article:article_list")
 
-
 def user_register(request):
     if request.method == 'POST':
         user_register_form = UserRegisterForm(data=request.POST)
