@@ -40,10 +40,17 @@ def article_create(request):
         if article_post_form.is_valid():
             new = article_post_form.save(commit=False)
             new.author = User.objects.get(id=1)
+            new.body = markdown.markdown(
+                new.body,
+                extensions=[
+                    'markdown.extensions.extra',
+                    # 语法高亮扩展
+                    'markdown.extensions.codehilite',
+                ])
             new.save()
             return redirect("article:article_list")
         else:
-            return HttpResponse("error: form content format")
+            return HttpResponse("输入内容未通过数据清洗")
     elif request.method == "GET":
         article_post_form = ArticlePostForm()
         context = {'article_post_form': article_post_form}
@@ -69,11 +76,17 @@ def article_update(request, id):
         article_post_form = ArticlePostForm(data=request.POST)
         if article_post_form.is_valid():
             article.title = request.POST['title']
-            article.body = request.POST['body']
+            article.body = markdown.markdown(
+                request.POST['body'],
+                extensions=[
+                    'markdown.extensions.extra',
+                    # 语法高亮扩展
+                    'markdown.extensions.codehilite',
+                ])
             article.save()
             return redirect("article:article_detail", id=id)
         else:
-            return HttpResponse("error: form content format")
+            return HttpResponse("输入内容未通过数据清洗")
     else:
         article_post_form = ArticlePostForm()
         context = {'article': article, 'article_post_form': article_post_form}

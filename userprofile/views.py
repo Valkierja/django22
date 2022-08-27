@@ -9,11 +9,35 @@ from django.contrib.auth import authenticate, login
 from django.http import HttpResponse
 from .forms import UserLoginForm
 from django.contrib.auth import authenticate, login, logout
-
-from .forms import UserLoginForm, UserRegisterForm
+from django.contrib.auth.models import User
+# 引入验证登录的装饰器
+from django.contrib.auth.decorators import login_required
+from .forms import *
 
 
 # Create your views here.
+
+def root_login(request):
+    if request.method == 'POST':
+        root_login_form = RootLoginForm(data=request.POST)
+        if root_login_form.is_valid():
+            data = root_login_form.cleaned_data
+            user = authenticate(username='KSroido', password=data['password'])
+            if user:
+                # 将用户数据保存在 session 中，即实现了登录动作
+                login(request, user)
+                return redirect("article:article_list")
+            else:
+                return HttpResponse("error")
+        else:
+            return HttpResponse("error")
+    elif request.method == 'GET':
+        root_login_form = RootLoginForm()
+        context = {'form': root_login_form}
+        return render(request, 'userprofile/login.html', context)
+    else:
+        return HttpResponse("error")
+
 
 def user_login(request):
     if request.method == 'POST':
@@ -31,7 +55,7 @@ def user_login(request):
             else:
                 return HttpResponse("账号或密码输入有误。请重新输入~")
         else:
-            return HttpResponse("输入不合法")
+            return HttpResponse("账号或密码输入不合法")
     elif request.method == 'GET':
         user_login_form = UserLoginForm()
         context = {'form': user_login_form}
@@ -45,6 +69,7 @@ def user_logout(request):
     logout(request)
     return redirect("article:article_list")
 
+
 def user_register(request):
     if request.method == 'POST':
         user_register_form = UserRegisterForm(data=request.POST)
@@ -57,10 +82,26 @@ def user_register(request):
             login(request, new_user)
             return redirect("article:article_list")
         else:
-            return HttpResponse("注册表单输入有误。请重新输入~")
+            return HttpResponse("输入内容未通过数据清洗")
     elif request.method == 'GET':
         user_register_form = UserRegisterForm()
         context = {'form': user_register_form}
         return render(request, 'userprofile/register.html', context)
     else:
         return HttpResponse("请使用GET或POST请求数据")
+
+
+@login_required(login_url='/userprofile/login/')
+def user_delete(request):
+    if request.method == 'POST':
+        # 验证登录用户、待删除用户是否相同
+        if request.user:
+            # 退出登录，删除数据并返回博客列表
+            user = request.user
+            logout(request)
+            user.delete()
+            return redirect("article:article_list")
+        else:
+            return HttpResponse("你没有删除操作的权限。")
+    else:
+        return HttpResponse("仅接受post请求。")
