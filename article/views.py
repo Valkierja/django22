@@ -61,7 +61,7 @@ def article_delete(request, id):
     ArticlePost.objects.get(id=id).delete()
     return redirect("article:article_list")
 
-
+@login_required(login_url='/userprofile/login/')
 def article_safe_delete(request, id):
     if request.method == 'POST':
         ArticlePost.objects.get(id=id).delete()
