@@ -10,7 +10,7 @@ from django.shortcuts import render, redirect
 from .forms import ArticlePostForm
 # 引入User模型
 from django.contrib.auth.models import User
-
+from django.contrib.auth.decorators import login_required
 
 def article_list(request):
     articles = ArticlePost.objects.all()
