@@ -27,8 +27,10 @@ import article
 from article import views
 
 urlpatterns = [
+   
     path('admin/', admin.site.urls),
     path("article/", include("article.urls", namespace="article")),
     path('userprofile/', include('userprofile.urls', namespace='userprofile')),
+    path('', article.views.article_list, name='index'),
 
 ]

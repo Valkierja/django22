@@ -33,7 +33,7 @@ def article_details(request, id):
     context = {'article': article}
     return render(request, 'article/detail.html', context)
 
-
+@login_required(login_url='/userprofile/login/')
 def article_create(request):
     if request.method == "POST":
         article_post_form = ArticlePostForm(data=request.POST)
@@ -57,9 +57,9 @@ def article_create(request):
         return render(request, 'article/create.html', context)
 
 
-def article_delete(request, id):
-    ArticlePost.objects.get(id=id).delete()
-    return redirect("article:article_list")
+# def article_delete(request, id):
+#     ArticlePost.objects.get(id=id).delete()
+#     return redirect("article:article_list")
 
 @login_required(login_url='/userprofile/login/')
 def article_safe_delete(request, id):
@@ -69,7 +69,7 @@ def article_safe_delete(request, id):
     else:
         return HttpResponse("error: POST only.")
 
-
+@login_required(login_url='/userprofile/login/')
 def article_update(request, id):
     article = ArticlePost.objects.get(id=id)
     if request.method == "POST":
