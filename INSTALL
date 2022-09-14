@@ -19,8 +19,8 @@ vim ksroido.moe
 #    alias /www/sites/ksroido.moe/django22/staticfiles;
 #  }
 #  location / {
-#    rewrite ^(.*)$  http://www.ksroido.moe/article/article-list/;
 #    proxy_set_header Host $host;
+#    rewrite .* /article/article-list permanent;
 #    proxy_pass http://unix:/tmp/www.ksroido.moe.socket; 
 #  }
 #}
