@@ -27,4 +27,4 @@ ln -s /etc/nginx/sites-available/ksroido.moe /etc/nginx/sites-enabled
 pip3 install gunicorn
 service nginx reload
 
-#gunicorn --bind unix:/tmp/45.32.117.61.socket my_blog.wsgi:application
+#gunicorn --bind unix:/tmp/www.ksroido.moe.socket my_blog.wsgi:application
