@@ -44,7 +44,7 @@ DEBUG = True
 
 MAX_CONN_AGE = 600
 
-ALLOWED_HOSTS = ['*',
+ALLOWED_HOSTS = ['www.ksroido.moe',
                  ]
 # if IS_HEROKU:
 #

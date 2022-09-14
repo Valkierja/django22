@@ -14,13 +14,13 @@ vim ksroido.moe
 #server {
 #  charset utf-8;
 #  listen 80;
-#  server_name 45.32.117.61; 
+#  server_name www.ksroido.moe; 
 #  location /static {
 #    alias /www/sites/ksroido.moe/django22/staticfiles;
 #  }
 #  location / {
 #    proxy_set_header Host $host;
-#    proxy_pass http://unix:/tmp/45.32.117.61.socket; 
+#    proxy_pass http://unix:/tmp/www.ksroido.moe.socket; 
 #  }
 #}
 ln -s /etc/nginx/sites-available/ksroido.moe /etc/nginx/sites-enabled
