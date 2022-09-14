@@ -2,10 +2,29 @@
 
 apt update
 apt upgrade
-apt install nginx python3  python3-pip  git vim curl 
-apt install libpq-dev python3-dev
-mkdir -p /wwww/sites/ksroido.moe
-cd  /wwww/sites/ksroido.moe
-chmod -R 755 /wwww/sites/ksroido.moe
+apt install -y nginx python3  python3-pip  git vim curl 
+apt install -y libpq-dev python3-dev
+pip3 install -r requirements.txt
+python3 manage.py collectstatic
+python3 manage.py migrate
+service nginx start
+cd /etc/nginx/sites-available
+vim ksroido.moe
 
+#server {
+#  charset utf-8;
+#  listen 80;
+#  server_name 45.32.117.61; 
+#  location /static {
+#    alias /www/sites/ksroido.moe/django22/staticfiles;
+#  }
+#  location / {
+#    proxy_set_header Host $host;
+#    proxy_pass http://unix:/tmp/45.32.117.61.socket; 
+#  }
+#}
+ln -s /etc/nginx/sites-available/ksroido.moe /etc/nginx/sites-enabled
+pip3 install gunicorn
+service nginx reload
 
+#gunicorn --bind unix:/tmp/45.32.117.61.socket my_blog.wsgi:application
