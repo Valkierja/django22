@@ -14,6 +14,8 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from argparse import Namespace
+import imp
+from platform import architecture
 from xml.etree.ElementInclude import include
 from django.contrib import admin
 
@@ -21,8 +23,11 @@ from django.urls import path, include
 from django.shortcuts import redirect
 from django.urls import path, include
 
+import article
+from article import views
 
 urlpatterns = [
+    path(r'^$', 'macmonster.views.home',article.views.article_list),
     path('', lambda request: redirect('article/', permanent=True)),
     path('admin/', admin.site.urls),
     path("article/", include("article.urls", namespace="article")),
