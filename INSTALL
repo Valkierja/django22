@@ -16,7 +16,7 @@ vim ksroido.moe
 #  listen 80;
 #  server_name 45.32.117.61; 
 #  location /static {
-#    alias /www/sites/ksroido.moe/django22/collected_static;
+#    alias /www/sites/ksroido.moe/django22/staticfiles;
 #  }
 #  location / {
 #    proxy_set_header Host $host;
