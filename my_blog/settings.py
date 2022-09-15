@@ -25,16 +25,20 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '!0dpym)-^ltf4!i_6p3mqce6og4mbd(9t#j*ounyf&m0=!e*r3'
+#SECRET_KEY = '!0dpym)-^ltf4!i_6p3mqce6og4mbd(9t#j*ounyf&m0=!e*r3'
 '''
 Dear hacker,
     The SECRET_KEY above is only used for local testing
                         Yours sincerely,
                         KSroido
 '''
-
-if 'SECRET_KEY' in os.environ:
-    SECRET_KEY = os.environ["SECRET_KEY"]
+from dotenv import load_dotenv, find_dotenv
+load_dotenv(find_dotenv())
+SECRET_KEY = os.environ['SECRET_KEY']
+# dotenv_file = os.path.join(BASE_DIR, ".env")
+# dotenv.load_dotenv(dotenv_file)
+# # if 'SECRET_KEY' in os.environ:
+# SECRET_KEY = os.environ["SECRET_KEY"]
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # if IS_HEROKU:
