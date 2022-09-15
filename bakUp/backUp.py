@@ -3,6 +3,8 @@ from datetime import datetime
 from webdav4.client import Client
 import pathlib
 from dotenv import load_dotenv, find_dotenv
+import os 
+
 load_dotenv(find_dotenv())
 PASSWD = os.environ['PASSWD']
 # TODO:not add webdav4 to requirements.txt yet
