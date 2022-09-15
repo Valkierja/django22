@@ -29,3 +29,19 @@ pip3 install gunicorn
 service nginx reload
 
 #gunicorn --bind unix:/tmp/www.ksroido.moe.socket my_blog.wsgi:application
+
+# [Unit]
+# Description=My blog service
+# save below to /etc/systemd/system/my_blog.service
+# [Service]
+# Type=forking
+# ExecStart=gunicorn --bind unix:/tmp/www.ksroido.moe.socket my_blog.wsgi:application
+# KillMode=process
+# Restart=on-failure
+# RestartSec=5s
+
+# [Install]
+# WantedBy=multi-user.target
+
+
+# systemctl enable my_blog
