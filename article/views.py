@@ -11,11 +11,14 @@ from .forms import ArticlePostForm
 # 引入User模型
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
+from django.core.paginator import Paginator
 
 def article_list(request):
-    articles = ArticlePost.objects.all()
-    if len(articles) >= 100:
-        articles = articles[:99] + "..."
+    article_list  = ArticlePost.objects.all()
+    paginator = Paginator(article_list, 10)
+    
+    page = request.GET.get('page')
+    articles = paginator.get_page(page)
     context = {'articles': articles}
     return render(request, 'article/list.html', context)
     # return HttpResponse("Hello World!")
@@ -23,33 +26,25 @@ def article_list(request):
 
 def article_details(request, id):
     article = ArticlePost.objects.get(id=id)
-    article.body = markdown.markdown(
-        article.body,
+    article.body = markdown.markdown(article.body,
         extensions=[
-            'markdown.extensions.extra',
-            # 语法高亮扩展
-            'markdown.extensions.codehilite',
+        'markdown.extensions.extra',
+        'markdown.extensions.codehilite',
         ])
-    context = {'article': article}
+    context = { 'article': article }
     return render(request, 'article/detail.html', context)
 
 def article_create(request):
     if request.method == "POST":
         article_post_form = ArticlePostForm(data=request.POST)
         if article_post_form.is_valid():
-            new = article_post_form.save(commit=False)
-            new.author = User.objects.get(id=1)
-            new.body = markdown.markdown(
-                new.body,
-                extensions=[
-                    'markdown.extensions.extra',
-                    # 语法高亮扩展
-                    'markdown.extensions.codehilite',
-                ])
-            new.save()
+            new_article = article_post_form.save(commit=False)
+            new_article.author = User.objects.get(id=1)
+            new_article.save()
             return redirect("article:article_list")
         else:
-            return HttpResponse("输入内容未通过数据清洗")
+            return HttpResponse("ERROR:article_create code 1")
+    # 如果用户请求获取数据
     elif request.method == "GET":
         article_post_form = ArticlePostForm()
         context = {'article_post_form': article_post_form}
@@ -74,17 +69,11 @@ def article_update(request, id):
         article_post_form = ArticlePostForm(data=request.POST)
         if article_post_form.is_valid():
             article.title = request.POST['title']
-            article.body = markdown.markdown(
-                request.POST['body'],
-                extensions=[
-                    'markdown.extensions.extra',
-                    # 语法高亮扩展
-                    'markdown.extensions.codehilite',
-                ])
+            article.body = request.POST['body']
             article.save()
             return redirect("article:article_detail", id=id)
         else:
-            return HttpResponse("输入内容未通过数据清洗")
+            return HttpResponse("表单内容有误，请重新填写。")
     else:
         article_post_form = ArticlePostForm()
         context = {'article': article, 'article_post_form': article_post_form}
