@@ -46,6 +46,7 @@ MAX_CONN_AGE = 600
 
 ALLOWED_HOSTS = ['*',
                  ]
+CSRF_TRUSTED_ORIGINS = ['www.ksroido.moe']
 # if IS_HEROKU:
 #
 # else:
