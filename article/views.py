@@ -15,8 +15,8 @@ from django.core.paginator import Paginator
 
 def article_list(request):
     article_list  = ArticlePost.objects.all()
-    paginator = Paginator(article_list, 1)
-    #paginator = Paginator(article_list, 10)
+    paginator = Paginator(article_list, 10)
+    #paginator = Paginator(article_list, 1)
     
     page = request.GET.get('page')
     articles = paginator.get_page(page)
