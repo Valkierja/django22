@@ -34,6 +34,7 @@ def article_details(request, id):
     context = { 'article': article }
     return render(request, 'article/detail.html', context)
 
+@login_required(login_url='/userprofile/login/')
 def article_create(request):
     if request.method == "POST":
         article_post_form = ArticlePostForm(data=request.POST)
@@ -55,6 +56,7 @@ def article_create(request):
 #     ArticlePost.objects.get(id=id).delete()
 #     return redirect("article:article_list")
 
+@login_required(login_url='/userprofile/login/')
 def article_safe_delete(request, id):
     if request.method == 'POST':
         ArticlePost.objects.get(id=id).delete()
