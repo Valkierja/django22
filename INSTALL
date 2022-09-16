@@ -37,7 +37,8 @@ service nginx reload
 
 # [Service]
 # Type=forking
-# ExecStart=gunicorn --bind unix:/tmp/www.ksroido.moe.socket /www/sites/ksroido.moe/django22//my_blog.wsgi:application
+# WorkingDirectory=/www/sites/ksroido.moe/django22/
+# ExecStart=gunicorn --bind unix:/tmp/www.ksroido.moe.socket my_blog.wsgi:application
 # KillMode=process
 # Restart=on-failure
 # RestartSec=5s
