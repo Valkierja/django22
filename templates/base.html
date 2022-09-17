@@ -12,7 +12,6 @@
     {% include 'header.html' %}
 
     {% block content %}{% endblock content %}
-    {% include 'footer.html' %}
     <script src="https://unpkg.com/@popperjs/core@2"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/KSroido/django22/static/layui/layui.js"></script>
@@ -21,6 +20,8 @@
     $('div#article_body table').addClass('table table-bordered');
     $('div#article_body thead').addClass('thead-light');
     </script>
+    
+    {% include 'footer.html' %}
 
 </body>
 </html>
