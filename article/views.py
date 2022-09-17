@@ -13,6 +13,10 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 
+def about_page(request):
+     return render(request, 'article/about.html')
+
+
 def article_list(request):
     article_list  = ArticlePost.objects.all()
     paginator = Paginator(article_list, 10)

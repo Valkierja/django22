@@ -31,5 +31,5 @@ urlpatterns = [
     path("article/", include("article.urls", namespace="article")),
     path('userprofile/', include('userprofile.urls', namespace='userprofile')),
     path('', article.views.article_list, name='index'),
-
+    path('about/',article.views.about_page, name='about')
 ]
