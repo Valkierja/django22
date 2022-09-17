@@ -12,7 +12,8 @@ PASSWD = os.environ['PASSWD']
 client = Client(base_url='https://dav.jianguoyun.com/dav/bak',
                 auth=('ksxmyqj@gmail.com', PASSWD))  # add passwd
 
-fileName = input('fileName')
+fileName = input('fileName: ')
+fileName= fileName+'.sqlite3'
 # pathlike = pathlib.Path('../db.sqlite3')
-client.download_file(from_path=fileName, to_path='../db.sqlite3', overwrite=False)
+client.download_file(from_path=fileName, to_path='../db.sqlite3')
 print('Success\n')
