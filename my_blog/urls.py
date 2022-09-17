@@ -23,7 +23,7 @@ from django.urls import path, include
 from django.shortcuts import redirect
 from django.urls import path, include
 
-# import  article  
+import  article  
 
 urlpatterns = [
     path('admin/', admin.site.urls),
