@@ -26,10 +26,9 @@ from django.urls import path, include
 import article
 
 urlpatterns = [
-   
+    path('about/',article.views.about_page, name='about'),
     path('admin/', admin.site.urls),
     path("article/", include("article.urls", namespace="article")),
     path('userprofile/', include('userprofile.urls', namespace='userprofile')),
     path('', article.views.article_list, name='index'),
-    path('about/',article.views.about_page, name='about')
 ]
