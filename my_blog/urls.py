@@ -23,7 +23,7 @@ from django.urls import path, include
 from django.shortcuts import redirect
 from django.urls import path, include
 
-import article
+from  article import views
 
 urlpatterns = [
     path('about/',views.about_page, name='about'),
