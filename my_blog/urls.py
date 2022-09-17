@@ -23,12 +23,11 @@ from django.urls import path, include
 from django.shortcuts import redirect
 from django.urls import path, include
 
-from  article import views
+import  article  
 
 urlpatterns = [
-    path('about/',views.about_page, name='about'),
     # path('admin/', admin.site.urls),
     path("article/", include("article.urls", namespace="article")),
     path('userprofile/', include('userprofile.urls', namespace='userprofile')),
-    path('', views.article_list, name='index'),
+    path('', article.views.article_list, name='index'),
 ]
