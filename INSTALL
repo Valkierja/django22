@@ -30,8 +30,9 @@ service nginx reload
 
 #gunicorn --bind unix:/tmp/www.ksroido.moe.socket my_blog.wsgi:application
 
-
+# not work for docker 
 # save below to /etc/systemd/system/my_blog.service
+
 # [Unit]
 # Description=My blog service
 
@@ -48,3 +49,24 @@ service nginx reload
 
 
 # systemctl enable my_blog
+
+# docker use below
+
+# echo_supervisord_conf > /etc/supervisord.conf
+# mkdir /etc/supervisor.d
+# vim /etc/supervisord.conf
+# add below:
+# [include]
+# files = supervisor.d/*.ini
+
+# vim /etc/supervisor.d/my_blog.ini
+
+# [program:myblog]
+# command=gunicorn --bind unix:/tmp/www.ksroido.moe.socket my_blog.wsgi:application         
+# directory=/www/sites/ksroido.moe/django22/       
+# redirect_stderr=true          
+# stdout_logfile=/www/sites/ksroido.moe/supervisor.log     
+
+chmod -R 755 /www/sites/ksroido.moe/django22/  
+chmod 755 /www/sites/ksroido.moe/supervisor.log
+useradd blog

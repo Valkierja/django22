@@ -1,0 +1,2 @@
+cd /www/sites/ksroido.moe/django22/
+nohup gunicorn --bind unix:/tmp/www.ksroido.moe.socket my_blog.wsgi:application &
